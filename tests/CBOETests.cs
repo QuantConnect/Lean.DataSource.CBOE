@@ -27,7 +27,7 @@ using QuantConnect.DataSource;
 namespace QuantConnect.DataLibrary.Tests
 {
     [TestFixture]
-    public class MyCustomDataTypeTests
+    public class CBOETests
     {
         [Test]
         public void JsonRoundTrip()
@@ -40,7 +40,7 @@ namespace QuantConnect.DataLibrary.Tests
             AssertAreEqual(expected, result);
         }
 
-        [Test]
+        [Test, Ignore("ProtoBuf not supported for this data type")]
         public void ProtobufRoundTrip()
         {
             var expected = CreateNewInstance();
@@ -87,12 +87,17 @@ namespace QuantConnect.DataLibrary.Tests
 
         private BaseData CreateNewInstance()
         {
-            return new MyCustomDataType
+            return new CBOE
             {
                 Symbol = Symbol.Empty,
                 Time = DateTime.Today,
                 DataType = MarketDataType.Base,
-                SomeCustomProperty = "This is some market related information"
+                Period = TimeSpan.FromDays(1),
+
+                Open = 1m,
+                High = 2m,
+                Low = 1m,
+                Close = 1.5m
             };
         }
     }
