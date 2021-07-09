@@ -29,6 +29,11 @@ namespace QuantConnect.DataSource
     public class CBOE : TradeBar
     {
         /// <summary>
+        /// Data source ID
+        /// </summary>
+        public static int DataSourceId { get; } = 2001;
+
+        /// <summary>
         /// Creates a new instance of the object
         /// </summary>
         public CBOE()
