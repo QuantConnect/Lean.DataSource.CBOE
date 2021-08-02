@@ -33,11 +33,11 @@ namespace QuantConnect.DataLibrary.Tests
         public void EndTimeShiftedOneDayForward()
         {
             var date = new DateTime(2020, 5, 21);
-            var cboe = new QuantConnect.Data.Custom.CBOE.CBOE();
+            var cboe = new CBOE();
             var cboeData = "2020-05-21,1,1,1,1";
-            var symbol = new Symbol(SecurityIdentifier.GenerateBase(typeof(QuantConnect.Data.Custom.CBOE.CBOE), "VIX", QuantConnect.Market.USA), "VIX");
+            var symbol = new Symbol(SecurityIdentifier.GenerateBase(typeof(CBOE), "VIX", QuantConnect.Market.USA), "VIX");
             var actual = cboe.Reader(new SubscriptionDataConfig(
-                typeof(QuantConnect.Data.Custom.CBOE.CBOE),
+                typeof(CBOE),
                 symbol,
                 Resolution.Daily,
                 QuantConnect.TimeZones.Utc,
