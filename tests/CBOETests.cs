@@ -30,6 +30,28 @@ namespace QuantConnect.DataLibrary.Tests
     public class CBOETests
     {
         [Test]
+        public void EndTimeShiftedOneDayForward()
+        {
+            var date = new DateTime(2020, 5, 21);
+            var cboe = new CBOE();
+            var cboeData = "2020-05-21,1,1,1,1";
+            var symbol = new Symbol(SecurityIdentifier.GenerateBase(typeof(CBOE), "VIX", QuantConnect.Market.USA), "VIX");
+            var actual = cboe.Reader(new SubscriptionDataConfig(
+                typeof(CBOE),
+                symbol,
+                Resolution.Daily,
+                QuantConnect.TimeZones.Utc,
+                QuantConnect.TimeZones.Utc,
+                false,
+                false,
+                false,
+                true), cboeData, date, false);
+
+            Assert.AreEqual(date, actual.Time);
+            Assert.AreEqual(date.AddDays(1), actual.EndTime);
+        }
+
+        [Test]
         public void JsonRoundTrip()
         {
             var expected = CreateNewInstance();
