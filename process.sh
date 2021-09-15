@@ -28,6 +28,7 @@ try_cboe_download TYVIX tyvix
 try_cboe_download VIX3M vix3m
 try_cboe_download VIX6M vix6m
 try_cboe_download VIX9D vix9d
+try_cboe_download VIX1Y vix1y
 
 echo "Uploading CBOE data files to cache bucket"
 aws s3 sync $destination_folder/ s3://cache.quantconnect.com/
