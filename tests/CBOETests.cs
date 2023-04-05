@@ -52,6 +52,33 @@ namespace QuantConnect.DataLibrary.Tests
         }
 
         [Test]
+        public void SingleColumnData()
+        {
+            const decimal expected = 123m;
+            var date = new DateTime(2020, 5, 21);
+            var cboe = new CBOE();
+            var cboeData = $"2020-05-21,{expected}";
+            var symbol = new Symbol(SecurityIdentifier.GenerateBase(typeof(CBOE), "VIX", QuantConnect.Market.USA), "VIX");
+            var actual = cboe.Reader(new SubscriptionDataConfig(
+                typeof(CBOE),
+                symbol,
+                Resolution.Daily,
+                QuantConnect.TimeZones.Utc,
+                QuantConnect.TimeZones.Utc,
+                false,
+                false,
+                false,
+                true), cboeData, date, false) as CBOE;
+
+            Assert.AreEqual(date, actual.Time);
+            Assert.AreEqual(date.AddDays(1), actual.EndTime);
+            Assert.AreEqual(expected, actual.Open);
+            Assert.AreEqual(expected, actual.High);
+            Assert.AreEqual(expected, actual.Low);
+            Assert.AreEqual(expected, actual.Close);
+        }
+
+        [Test]
         public void JsonRoundTrip()
         {
             var expected = CreateNewInstance();

@@ -80,15 +80,13 @@ namespace QuantConnect.DataSource
                 .Select(x => x.Trim())
                 .ToList();
 
-            decimal open;
-            decimal high;
-            decimal low;
-            decimal close;
+            // Some data data has only one column, so all values will be the same
+            var indices = csv.Count == 2 ? new[] { 1, 1, 1, 1 } : new[] { 1, 2, 3, 4 };
 
-            QuantConnect.Parse.TryParse(csv[1], NumberStyles.Any, out open);
-            QuantConnect.Parse.TryParse(csv[2], NumberStyles.Any, out high);
-            QuantConnect.Parse.TryParse(csv[3], NumberStyles.Any, out low);
-            QuantConnect.Parse.TryParse(csv[4], NumberStyles.Any, out close);
+            QuantConnect.Parse.TryParse(csv[indices[0]], NumberStyles.Any, out decimal open);
+            QuantConnect.Parse.TryParse(csv[indices[1]], NumberStyles.Any, out decimal high);
+            QuantConnect.Parse.TryParse(csv[indices[2]], NumberStyles.Any, out decimal low);
+            QuantConnect.Parse.TryParse(csv[indices[3]], NumberStyles.Any, out decimal close);
 
             return new CBOE
             {
