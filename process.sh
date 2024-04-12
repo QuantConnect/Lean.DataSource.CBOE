@@ -41,6 +41,7 @@ try_cboe_download VXGOG vxgog
 try_cboe_download VXGS vxgs
 try_cboe_download VXIBM vxibm
 try_cboe_download VXEFA vxefa
+try_cboe_download VXD vxd
 
 echo "Uploading CBOE data files to cache bucket"
 aws s3 sync $destination_folder/ s3://cache.quantconnect.com/
