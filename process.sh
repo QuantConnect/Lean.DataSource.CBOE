@@ -28,6 +28,7 @@ try_cboe_download TYVIX tyvix
 try_cboe_download VIX3M vix3m
 try_cboe_download VIX6M vix6m
 try_cboe_download VIX9D vix9d
+try_cboe_download VIX1D vix1d
 try_cboe_download VIX1Y vix1y
 try_cboe_download VXEEM vxeem
 try_cboe_download VVIX vvix
